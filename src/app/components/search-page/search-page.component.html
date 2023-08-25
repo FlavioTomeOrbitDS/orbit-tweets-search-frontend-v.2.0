@@ -1,128 +1,68 @@
-<!DOCTYPE html>
-<html>
-  <head>
+<!-------------------------- FORM ------------------------------>
+<div class="container">
+  <br />
+  <h2 style="color: #367fbf; font-weight: bold">Tweets Search</h2>
+  <form method="post" name="form1">
+    <div class="form-group">
+      <!-------------------------- ACCOUNT CHECK ------------------------------>
+      <label class="form-check-label" for="flexCheckChecked">
+        Conta do Twitter
+      </label>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="1"
+          name="account_radio"
+          id="radio1"
+          checked
+          (click)="switchAccount(0)"
+        />
+        <label class="form-check-label" for="flexCheckChecked">
+          Conta 1 (@‌Orbit176178735)
+        </label>
+      </div>
 
-    <!-- Fengyuan Chen's Datepicker -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css"
-      integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE="
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"
-      integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k="
-      crossorigin="anonymous"
-    ></script>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="1"
+          name="account_radio"
+          id="radio2"
+          (click)="switchAccount(1)"
+        />
+        <label class="form-check-label" for="flexCheckChecked">
+          Conta 2 (@orbitdatascien1)
+        </label>
+      </div>
+      <!-------------------------- Query ------------------------------>
+      <label for="formGroupExampleInput">Query</label>
+      <input
+        type="text"
+        class="form-control"
+        name="query"
+        id="query"
+        placeholder="Insira a query de busca"
+        required="true"
+        [(ngModel)]="queryContent"
+      />
+      <!-------------------------- Idioma ------------------------------>
+      <label for="inputState">Idioma</label>
+      <select
+        name="idioma"
+        id="idioma"
+        class="form-control"
+        required="true"
+        [(ngModel)]="langContent"
+      >
+        <option selected value="-1">Qualquer Idioma</option>
+        <option *ngFor="let key of languageKeys" [value]="key">
+          {{ languages[key] }}
+        </option>
+      </select>
 
-    <script>
-      $(function () {
-        $("#datepicker").datepicker({ format: "dd/mm/yyyy" });
-        $("#datepicker2").datepicker({ format: "dd/mm/yyyy" });
-      });
-
-      function setCoordInputsStatus() {
-        if (document.getElementById("coordinates_chk").checked == true) {
-          document.getElementById("lat_input").removeAttribute("disabled");
-          document.getElementById("long_input").removeAttribute("disabled");
-          document.getElementById("radius_input").removeAttribute("disabled");
-          document.getElementById("lat_input").removeAttribute("required");
-          document.getElementById("long_input").removeAttribute("required");
-          document.getElementById("radius_input").removeAttribute("required");
-        } else {
-          document.getElementById("lat_input").setAttribute("disabled", "true");
-          document
-            .getElementById("long_input")
-            .setAttribute("disabled", "true");
-          document
-            .getElementById("radius_input")
-            .setAttribute("disabled", "true");
-          document.getElementById("lat_input").setAttribute("required", "true");
-          document
-            .getElementById("long_input")
-            .setAttribute("required", "true");
-          document
-            .getElementById("radius_input")
-            .setAttribute("required", "true");
-        }
-      }
-
-      function hideCoordInputs(flag) {
-        document.getElementById("fullsearch_div").style.display = flag;
-      }
-    </script>
-
-
-  </head>
-
-  <title>Orbit Tweets Search</title>
-  <body>
-
-    <!-------------------------- FORM ------------------------------>
-    <div class="container">
-      <br />
-      <h2 style="color: #367fbf; font-weight: bold">Tweets Search</h2>
-      <form method="post" name="form1">
-        <div class="form-group">
-          <!-------------------------- ACCOUNT CHECK ------------------------------>
-          <label class="form-check-label" for="flexCheckChecked">
-              Conta do Twitter
-          </label>
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              value="1"
-              name="account_radio"
-              id="radio1"
-              checked
-              (click)="switchAccount(0)"
-            />
-            <label class="form-check-label" for="flexCheckChecked">
-              Conta 1 (@‌Orbit176178735)
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="radio"
-              value="1"
-              name="account_radio"
-              id="radio2"
-              (click)="switchAccount(1)"
-            />
-            <label class="form-check-label" for="flexCheckChecked">
-              Conta 2 (@orbitdatascien1)
-            </label>
-          </div>
-          <!-------------------------- Query ------------------------------>
-          <label for="formGroupExampleInput">Query</label>
-          <input
-            type="text"
-            class="form-control"
-            name="query"
-            id="query"
-            placeholder="Insira a query de busca"
-            required="true"
-            [(ngModel)]="queryContent"
-          />
-          <!-------------------------- Idioma ------------------------------>
-          <label for="inputState">Idioma</label>
-          <select
-            name="idioma"
-            id="idioma"
-            class="form-control"
-            required="true"
-            [(ngModel)]="langContent"
-          >
-            <option selected value="-1">Qualquer Idioma</option>
-            <option *ngFor="let key of languageKeys" [value]="key">
-              {{ languages[key] }}
-            </option>
-          </select>
-
-          <!-- ------------------------ Datas ----------------------------
+      <!-- ------------------------ Datas ----------------------------
           <label  for="formGroupExampleInput">Data Inicial</label>
           <input
             type="text"
@@ -140,59 +80,57 @@
             required="true"
           /> -->
 
-          <br />
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="1"
-              name="retweets_chk"
-              id="retweets_chk"
-              (click)="toogleIncludeRetweets()"
-            />
-            <label class="form-check-label" for="flexCheckChecked">
-              Incluir Retweets
-            </label>
-          </div>
+      <br />
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="1"
+          name="retweets_chk"
+          id="retweets_chk"
+          (click)="toogleIncludeRetweets()"
+        />
+        <label class="form-check-label" for="flexCheckChecked">
+          Incluir Retweets
+        </label>
+      </div>
 
-          <div class="form-check">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="1"
-              name="replies_chk"
-              id="replies_chk"
-              (click)="toogleIncludeReplies()"
-            />
-            <label class="form-check-label" for="flexCheckChecked">
-              Incluir Replies
-            </label>
-          </div>
-          <div class="container" style="align-items: center">
-            <br />
-            <p style="text-align: center">
-              <button
-                id="myBtn"
-                type="submit"
-                class="btn btn-primary"
-                (click)="sendData('tweetscount')"
-              >
-                Tweets Count (Últimos 7 dias)
-              </button>
-              <br />
-              <br />
-              <button
-                id="myBtn"
-                type="submit"
-                class="btn btn-primary"
-                (click)="sendData('tweetssearch')"
-              >
-                Tweets Search (últimas 24 horas)
-              </button>
-            </p>
-          </div>
-        </div>
-      </form>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="1"
+          name="replies_chk"
+          id="replies_chk"
+          (click)="toogleIncludeReplies()"
+        />
+        <label class="form-check-label" for="flexCheckChecked">
+          Incluir Replies
+        </label>
+      </div>
+      <div class="container" style="align-items: center">
+        <br />
+        <p style="text-align: center">
+          <button
+            id="myBtn"
+            type="submit"
+            class="btn btn-primary"
+            (click)="sendData('tweetscount')"
+          >
+            Tweets Count (Últimos 7 dias)
+          </button>
+          <br />
+          <br />
+          <button
+            id="myBtn"
+            type="submit"
+            class="btn btn-primary"
+            (click)="sendData('tweetssearch')"
+          >
+            Tweets Search (últimas 24 horas)
+          </button>
+        </p>
+      </div>
     </div>
-  </body>
-</html>
+  </form>
+</div>

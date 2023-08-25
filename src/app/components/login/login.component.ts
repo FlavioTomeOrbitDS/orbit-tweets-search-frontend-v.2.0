@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
       this.username,
       this.password
     );
-
     if (isAuthenticated) {
       // Redirect to the home page or the desired route upon successful login
+
       this.router.navigate(['/searchPage']);
     } else {
       this.loginError = true;
