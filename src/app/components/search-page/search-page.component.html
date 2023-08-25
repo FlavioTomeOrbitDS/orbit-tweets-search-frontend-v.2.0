@@ -1,7 +1,7 @@
 <!-------------------------- FORM ------------------------------>
 <div class="container">
   <br />
-  <h2 style="color: #367fbf; font-weight: bold">Tweets Search</h2>
+  <h2 style="color: #367fbf; font-weight: bold">Orbit Tweets Search</h2>
   <form method="post" name="form1">
     <div class="form-group">
       <!-------------------------- ACCOUNT CHECK ------------------------------>
@@ -108,7 +108,11 @@
           Incluir Replies
         </label>
       </div>
-      <div class="container" style="align-items: center">
+      <div
+        class="container"
+        style="align-items: center"
+        *ngIf="searchingTweets == false"
+      >
         <br />
         <p style="text-align: center">
           <button
@@ -130,6 +134,9 @@
             Tweets Search (últimas 24 horas)
           </button>
         </p>
+      </div>
+      <div class="text-center" *ngIf="searchingTweets == true">
+        <img width="20%" src="/assets/orbit.gif" />
       </div>
     </div>
   </form>

@@ -63,6 +63,9 @@ export class SearchPageComponent implements OnInit {
 
   twitterAccount = 0;
 
+  //used to show of hide the loading gif
+  searchingTweets = false;
+
   ngOnInit(): void {}
 
   //Radio Buttons Variables
@@ -74,9 +77,9 @@ export class SearchPageComponent implements OnInit {
     this.includeReplies = !this.includeReplies;
   }
 
-  public switchAccount(account: number){
+  public switchAccount(account: number) {
     this.twitterAccount = account;
-    console.log(this.twitterAccount)
+    console.log(this.twitterAccount);
   }
 
   //Add the specified filter in the query
@@ -133,16 +136,17 @@ export class SearchPageComponent implements OnInit {
       toDate: dates.now,
       fromDate: dates.yesterday,
     };
-
+    this.searchingTweets = true;
     //call the service to send the request
     this.searchService.sendRequest(dataToSend, endpoint).subscribe({
       next: (response: any) => {
         this.downloadExcel(response);
-        console.log(response);
+        this.searchingTweets = false;
         return true;
       },
       error: (error) => {
         console.error(error);
+        this.searchingTweets = false;
         return false;
       },
     });
